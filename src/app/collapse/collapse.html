@@ -1,0 +1,119 @@
+<div class="list-container">  
+  <div class="table-header">
+    <h2>User List</h2>
+  </div>
+
+  <div class="user-list">
+
+    @for (user of data; track user.Id) {
+
+      <div class="user-item">
+
+        <div class="user-header" (click)="toggleUser(user.Id)">
+
+          <span class="user-name">{{ user.UserName }}</span>
+
+          <button class="collapse-btn"  [class.open]="expandedId === user.Id">
+          </button>
+
+        </div>
+
+        @if(expandedId === user.Id) {
+          <div class="user-body">
+
+            <div class="detail-row">
+              <span >User Name:</span>
+              <span >{{ user.UserName }}</span>
+            </div>
+
+            <div class="detail-row">
+              <span>Phone:</span>
+              <span>{{ user.PhoneNumber }}</span>
+            </div>
+
+            <div class="detail-row">
+              <span>Email:</span>
+              <span>{{ user.Email }}</span>
+            </div>
+
+            <div class="detail-row">
+              <span>Date of Birth:</span>
+              <span>{{ user.DateOfBirth }}</span>
+            </div>
+
+            <div class="detail-row">
+              <span>Role:</span>
+              <span>{{ user.RoleName }}</span>
+            </div>
+
+            <div class="detail-row">
+              <span>Status:</span>
+              <span>{{ user.Status }}</span>
+            </div>
+
+            <div class="detail-row">
+              <span>Registered:</span>
+              <span>{{ user.CreatedDate }}</span>
+            </div>
+
+            <div class="detail-row">
+              <span>Regions:</span>
+              <span>{{ user.Regions }}</span>
+            </div>
+
+          </div>
+        }
+
+      </div>
+
+    }
+
+    @if (data.length === 0) {
+      <p class="no-data">No data found.</p>
+    }
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-bar" *ngIf="data.length > 0">
+
+    <div class="page-size">
+      <label>Rows per page:</label>
+      <select [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="25">25</option>
+        <option [value]="50">50</option>
+      </select>
+    </div>
+
+    <div class="total-count">
+      Total: <b>{{ totalItems }}</b>
+    </div>
+
+    <div class="page-buttons">
+      <button class="page-btn"
+              [disabled]="currentPage === 1"
+              (click)="changePage(currentPage - 1)">
+        ‹‹
+      </button>
+
+      <button
+        *ngFor="let p of arrive()"
+        class="page-btn"
+        [class.active]="p === currentPage"
+        [disabled]="p === '...'"
+        (click)="p !== '...' && changePage(+p)">
+        {{ p }}
+      </button>
+
+      <button class="page-btn"
+              [disabled]="currentPage === totalPages"
+              (click)="changePage(currentPage + 1)">
+        ››
+      </button>
+    </div>
+
+  </div>
+
+</div>
