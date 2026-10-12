@@ -1,0 +1,19 @@
+export class CreateAdminUser {
+  UserName: string = '';
+  PhoneNumber: string = '';
+  Email: string = '';
+  DateOfBirth: string = '';
+  BranchId: string = '';
+  RegionIds: string[] = [];
+  RoleId: string = '';
+  Status: string = 'Active';
+  TerminalId: string = '';
+  InsID: string = '';
+  CreatedDate: string = '';
+  Regions: any[] = [];
+  HashValue: string = '';
+  MsgID: string = '';
+  MsgType: string = 'CREATE_ADMINUSER';
+  TimeStamp: string = '';
+  VersionNo: string = '1.0.0';
+}

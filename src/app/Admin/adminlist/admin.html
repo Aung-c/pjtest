@@ -1,0 +1,77 @@
+<div class="table-container">
+
+  <div class="table-header">
+    <h2>Admin Users</h2>
+    <button class="create-btn" (click)="create()">+ Create</button>
+  </div>
+
+  <table>
+
+    <thead>
+      <tr>
+        @for (header of headers; track header) {
+          <th>{{ header }}</th>
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (u of adminUsers; track u.Id; let i = $index) {
+        <tr>
+          <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+          <td>{{ u.UserName }}</td>
+          <td>{{ u.DateOfBirth }}</td>
+          <td>{{ u.PhoneNumber }}</td>
+          <td>{{ u.Email }}</td>
+          <td>{{ u.RoleName }}</td>
+          <td>{{ u.CreatedDate }}</td>
+        </tr>
+      }
+
+      @if (adminUsers.length === 0) {
+        <tr>
+          <td [attr.colspan]="headers.length" class="no-data">
+            No Data Available
+          </td>
+        </tr>
+      }
+    </tbody>
+
+  </table>
+
+  <div class="bottom-bar">
+
+    <div class="page-size">
+      <span>Page Size:</span>
+      <select [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+        @for (size of [5,10,25,50]; track size) {
+          <option [value]="size">{{ size }}</option>
+        }
+      </select>
+      <span>{{ totalItems }} Records</span>
+    </div>
+
+    <div class="pagination">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+        «
+      </button>
+
+      @for (i of arrive(); track i) {
+        @if (i !== '...') {
+          <button (click)="changePage(+i)" [class.active]="i === currentPage">
+            {{ i }}
+          </button>
+        }
+        @if (i === '...') {
+          <span>...</span>
+        }
+      }
+
+      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+        »
+      </button>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,139 @@
+/* ===== Container ===== */
+.create-container {
+  padding: 24px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.create-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+/* ===== Form Card ===== */
+.form-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 32px 40px;
+}
+
+/* ===== Form Group (တစ်ခုချင်း အပေါ်အောက်) ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.required {
+  color: #e74c3c;
+  margin-left: 2px;
+}
+
+/* ===== Input / Select ===== */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 0 14px;
+  font-size: 14px;
+  color: #111827;
+  background: #fff;
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+  color: #b0b0b0;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #ee8c30;
+  box-shadow: 0 0 0 3px rgba(238, 140, 48, 0.1);
+}
+
+/* ===== Error Text ===== */
+.error-text {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+/* ===== Radio Group ===== */
+.radio-group {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  height: 44px;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+  font-weight: 400;
+}
+
+.radio-item input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #ee8c30;
+  cursor: pointer;
+}
+
+/* ===== Button Group ===== */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 32px;
+}
+
+.save-btn {
+  background: #ee8c30;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 60px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.save-btn:hover {
+  background: #df7d1f;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .create-container {
+    padding: 16px;
+  }
+
+  .form-card {
+    padding: 20px;
+  }
+
+  .save-btn {
+    width: 100%;
+    padding: 12px;
+  }
+}

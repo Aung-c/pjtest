@@ -1,0 +1,236 @@
+<div class="list-container">
+
+  <div class="modal-overlay" *ngIf="showCreateModal" (click)="onBackdropClick($event)">
+    <div class="modal-box">
+
+      <div class="create-header">
+        <h2 class="create-title">Create</h2>
+      </div>
+
+      <div class="form-card">
+
+        <div class="form-group">
+          <label>Name <span class="required"></span></label>
+          <input type="text" [(ngModel)]="form.UserName" placeholder="Type here">
+        </div>
+
+        <div class="form-group">
+          <label>Phone <span class="required"></span></label>
+          <input type= "tel" [(ngModel)]="form.PhoneNumber" placeholder="Type here">
+        </div>
+
+        <div class="form-group">
+          <label>Email <span class="required">*</span></label>
+          <input type="email" [(ngModel)]="form.Email" placeholder="Type here">
+        </div>
+
+        <div class="form-group">
+          <label>Date of Birth <span class="required"></span></label>
+          <input type="date" [(ngModel)]="form.DateOfBirth">
+        </div>
+
+        <div class="form-group">
+          <label>Role <span class="required"></span></label>
+          <select [(ngModel)]="form.RoleId">
+            <option value="">-- Select Role --</option>
+            @for (r of roles; track r.Label) {
+              <option [value]="r.Value">{{ r.Label }}</option>
+            }
+          </select>
+        </div>
+<!-- Branch -->
+        <div class="form-group">
+  <label>Branch <span class="required"></span></label>
+  <select [(ngModel)]="form.BranchId"  (change)="onBranchChange()"
+          [disabled]="branchLoading">
+    @if (branchLoading) {
+      <option value="">Loading branches...</option>
+    } @else {
+      <option value="">-- Select Branch --</option>
+      @for (b of branches; track b.Value) {
+        <option [value]="b.Value">{{ b.Label }}</option>
+      }
+    }
+  </select>
+</div>
+
+<div class="form-group">
+  <label>Terminal <span class="required"></span></label>
+  <select [(ngModel)]="form.TerminalId"
+          [disabled]="terminalLoading || !form.BranchId">
+    @if (terminalLoading) {
+      <option value="">Loading terminals...</option>
+    } @else if (!form.BranchId) {
+      <option value="">-- Select Branch first --</option>
+    } @else {
+      <option value="">-- Select Terminal --</option>
+      @for (t of terminals; track t.Value) {
+        <option [value]="t.Value">{{ t.Label }}</option>
+      }
+    }
+  </select>
+</div> 
+
+        <div class="form-group">
+          <label>Select Region  </label>
+          <select [(ngModel)]="form.RegionIds[0]">
+            <option value="">Choose Regions...</option>
+            @for (r of regions; track r.Value) {
+              <option [value]="r.Value">{{ r.Label }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Status <span class="required"></span></label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="status" value="Active" [(ngModel)]="form.Status">
+              <span>Active</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="status" value="Inactive" [(ngModel)]="form.Status">
+              <span>Inactive</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="cancel-btn" (click)="closeCreateModal()">Cancel</button>
+        <button type="button" class="save-btn" (click)="usercreate()">Save</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal-overlay" *ngIf="showDetailsModal" (click)="onDetailsBackdropClick($event)">
+    <div class="modal-box">
+
+      <div class="create-header">
+        <h2 class="create-title">User Details</h2>
+      </div>
+
+      <div class="details-body" *ngIf="selectedUser">
+
+        <div class="detail-row">
+          <span class="detail-label">User Name:</span>
+          <span class="detail-value">{{ selectedUser.UserName }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Phone:</span>
+          <span class="detail-value">{{ selectedUser.PhoneNumber }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Email:</span>
+          <span class="detail-value">{{ selectedUser.Email }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Date of Birth:</span>
+          <span class="detail-value">{{ selectedUser.DateOfBirth }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Role:</span>
+          <span class="detail-value">{{ selectedUser.RoleName }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Status:</span>
+          <span class="detail-value">{{ selectedUser.Status }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Registered:</span>
+          <span class="detail-value">{{ selectedUser.CreatedDate }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Regions:</span>
+          <span class="detail-value">
+            {{ selectedUser.Regions}}
+          </span>
+        </div>
+
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="cancel-btn" (click)="closeDetailsModal()">Close</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="table-header">
+    <h2>Admin List</h2>
+    <button class="create-btn" (click)="openCreateModal()">+ Create User</button>
+  </div>
+
+  <table class="list-table" *ngIf="data.length > 0">
+    <thead>
+      <tr>
+        <th *ngFor="let h of headers">{{ h }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of data; let i = index">
+        <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+        <td>{{ user.UserName }}</td>
+        <td>{{ user.DateOfBirth }}</td>
+        <td>{{ user.PhoneNumber }}</td>
+        <td>{{ user.Email }}</td>
+        <td>{{ user.RoleName }}</td>
+        <td>{{ user.CreatedDate }}</td>
+        <td>
+          <button class="details-btn" (click)="openDetailsModal(user)">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="no-data" *ngIf="data.length === 0">
+    No data found.
+  </p>
+
+  <div class="pagination-bar" *ngIf="data.length > 0">
+
+    <div class="page-size">
+      <label>Rows per page:</label>
+      <select [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="25">25</option>
+        <option [value]="50">50</option>
+      </select>
+    </div>
+
+    <div class="total-count">
+      Total: <b>{{ totalItems }}</b>
+    </div>
+
+    <div class="page-buttons">
+      <button class="page-btn" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">
+        ‹‹
+      </button>
+
+      <button
+        *ngFor="let p of arrive()"
+        class="page-btn"
+        [class.active]="p === currentPage"
+        [disabled]="p === '...'"
+        (click)="p !== '...' && changePage(+p)">
+        {{ p }}
+      </button>
+
+      <button class="page-btn" [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">
+        ››
+      </button>
+    </div>
+
+  </div>
+
+</div>

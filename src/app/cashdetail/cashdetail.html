@@ -1,0 +1,60 @@
+<div class="detail-container">
+
+  <div class="detail-header">
+    <button class="back-btn" routerLink="/cashlist">← Back</button>
+    <h2>Cash Request Detail</h2>
+  </div>
+
+  <div class="detail-card" *ngIf="detailData">
+
+    <div class="detail-row">
+      <div class="detail-item">
+        <label>Id</label>
+        <span>{{ detailData.Id }}</span>
+      </div>
+      <div class="detail-item">
+        <label>Cashier Name</label>
+        <span>{{ detailData.CashierName }}</span>
+      </div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-item">
+        <label>Branch Name</label>
+        <span>{{ detailData.BranchName }}</span>
+      </div>
+      <div class="detail-item">
+        <label>Terminal Name</label>
+        <span>{{ detailData.TerminalName }}</span>
+      </div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-item">
+        <label>Opening Balance</label>
+        <span>{{ detailData.OpeningBalance }}</span>
+      </div>
+      <div class="detail-item">
+        <label>Remaining Balance</label>
+        <span>{{ detailData.RemainingBalance }}</span>
+      </div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-item">
+        <label>Requested Date Time</label>
+        <span>{{ detailData.RequestedDateTime }}</span>
+      </div>
+      <div class="detail-item">
+        <label>Status</label>
+        <span>{{ detailData.Status }}</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="!detailData" class="no-data">
+    No Data Available
+  </div>
+
+</div>

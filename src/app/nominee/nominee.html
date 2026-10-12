@@ -1,0 +1,125 @@
+<div class="filter-card">
+  <div class="filter-row">
+    <div class="form-group">
+      <label>From Date</label>
+      <input
+        type="date"[(ngModel)]="find.beginDate">
+      </div>
+
+    <div class="form-group">
+      <label>To Date</label>
+      <input type="date" [(ngModel)]="find.endDate">
+    </div>
+
+    <div class="button-group">
+
+      <button
+        class="search-btn" (click)="search()">
+        Search
+      </button>
+
+      <button
+        class="reset-btn"  (click)="reset()">
+
+        Reset
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="table-container">
+
+  <table>
+
+    <thead>
+      <tr>
+      @for (header of headers; track header) {
+        <th>{{ header }}</th>
+            }
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let item of dataList; let i = index">
+
+        <td>
+          {{ (currentPage - 1) * pageSize + i + 1 }}
+        </td>
+
+        <td>{{ item.Name }}</td>
+        <td>{{ item.NRC }}</td>
+        <td>{{ item.PensionerNRC }}</td>
+        <td>{{ item.DateOfBirth }}</td>
+        <td>{{ item.MobileNumber }}</td>
+        <td>{{ item.Relation }}</td>
+        <td>{{ item.Address }}</td>
+        <td> {{item.CreatedDate}} </td>
+
+      </tr>
+
+      <tr *ngIf="dataList.length === 0">
+        <td colspan="8" class="no-data">
+          No Data Available
+        </td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <div class="bottom-bar">
+
+    <div class="page-size">
+
+      <span>Page Size:</span>
+
+      <select [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+        <option *ngFor="let size of [5,10,25,50]" [value]="size">
+          {{ size }}
+        </option>
+      </select>
+
+    </div>
+
+    <div class="pagination">
+
+      <button   (click)="changePage(currentPage - 1)"
+        [disabled]="currentPage === 1">
+        «
+      </button>
+
+      <ng-container *ngFor="let i of arrive()">
+
+        <button
+          *ngIf="i !== '...'"
+          (click)="changePage(+i)"
+          [class.active]="i === currentPage">
+
+          {{ i }}
+
+        </button>
+
+        <span *ngIf="i === '...'">
+          ...
+        </span>
+
+      </ng-container>
+
+      <button
+        (click)="changePage(currentPage + 1)"
+        [disabled]="currentPage === totalPages">
+
+        »
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

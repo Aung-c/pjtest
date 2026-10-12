@@ -1,0 +1,66 @@
+<div class="mor-container">
+
+  <button
+    type="button" class="open-btn"(click)="modal()">
+     Admin List
+  </button>
+
+  <button type="button" class="back" (click)="goBack()">
+    Back
+  </button>
+
+  @if (showModal) {
+    <div class= "modal-overlay">
+
+      <div class="modal-box">
+
+        <div class="modal-header">
+          <h2>Admin List</h2>
+          <button type="button"   class="close-btn" (click)=" showModal = false">
+            Close
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <table class="mor-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>User Name</th>
+                <th>Date of Birth</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of form; track user; let i = $index) {
+                <tr>
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ user.UserName }}</td>
+                  <td>{{ user.DateOfBirth }}</td>
+                  <td>{{ user.PhoneNumber }}</td>
+                  <td>{{ user.Email }}</td>
+                  <td>{{ user.RoleName }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+
+          @if ( form.length === 0) {
+            <div class="no-data">
+              No data found.
+            </div>
+          }
+
+        </div>
+
+      
+
+      </div>
+
+    </div>
+  }
+
+</div>

@@ -1,0 +1,16 @@
+<h2>Edit Role</h2>
+
+<input type="text" [(ngModel)]="detailData.RoleName">
+
+<br><br>
+
+<div *ngFor="let p of permissions">
+  <input type="checkbox"
+    [checked]="selectedIds.includes(p.Id)"
+    (change)="toggle(p.Id)">
+   {{ p.PermissionValue}}</div>  
+
+<br>
+
+<button (click)="save()" [disabled]="selectedIds.length === 0">Save</button>
+<button (click)="back()">Back</button>

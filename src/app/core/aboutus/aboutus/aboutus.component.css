@@ -1,0 +1,80 @@
+.container {
+  width: 800px;
+  margin: 20px auto;
+}
+
+h2,
+h3 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.btn-group {
+  margin: 15px 0;
+}
+
+.btn {
+  padding: 8px 15px;
+  margin-right: 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: green;
+}
+
+.btn-warning {
+  background-color: orange;
+}
+
+.btn-danger {
+  background-color: red;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+.select-btn {
+  background-color: #666;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.selected-row {
+  background-color: #ffffcc;
+}

@@ -1,0 +1,29 @@
+<div class="card">
+
+  <h2>Create</h2>
+
+  <label>Name </label>
+  <input class="input" type="text" [(ngModel)]="roleName" placeholder="Type here">
+
+  <p class="lbl">Permissions</p>
+
+ 
+    <label class="perm-item" *ngFor="let p of permissions">
+      <input type="checkbox"
+        [checked]="selectedIds.includes(p.Id)">
+        
+      <span>{{ p.PermissionValue }}</span>
+    </label>
+  </div>
+
+  <div class="actions">
+    <button class="btn-save"
+      (click)="save()"
+      [disabled]="!roleName || selectedIds.length === 0">
+      Save
+    </button>
+    <button class="btn-baack" (click)="back()" >
+      Back
+    </button>
+  </div>
+

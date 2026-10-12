@@ -7,7 +7,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/app/features/cats/pages/cat_list/cats.component.ts"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]

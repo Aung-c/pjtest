@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<div class="login-container">
+
+  <div class="left-panel">
+    <img
+      src="/images/login-banner.png"     alt="Login"
+      class="banner-foto">
+
+  </div>
+
+  <div class="right-panel">
+
+    <img
+      src="/images/logo.png.png" alt="Logo"
+      class="logo"
+    >
+
+    <h2>Login</h2>
+
+    <div class="form-group">
+
+      <label>
+        Email 
+      </label>
+
+      <input  id="email"        type="email"
+        [(ngModel)]="loginData.Email"
+        placeholder="Type here">
+      
+
+      <small
+        *ngIf="errors.Email"
+        class="error">
+        {{ errors.Email }}
+      </small>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label >Password</label>
+      
+      <div class="password-wrapper">
+
+        <input
+          id="password" 
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="loginData.Password"
+          placeholder="Type here">
+             
+
+        <i  class="fa-solid eye"  [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+  (click)="eye()">  </i>
+      
+      </div>
+
+      <small
+        *ngIf="errors.Password"
+        class="error">
+        {{ errors.Password }}
+      </small>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="login-btn"
+      (click)="login()">
+      Login
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,17 @@
+<h2>Edit Role</h2>
+<br><br>
+<h2>Name</h2>
+<p>Permissions</p>
+
+<div *ngFor="let p of permissions">
+ 
+
+ <input type="text" [value] = "p.PermissionValue">
+ <input type="text" 
+ [value]=" p.ClaimValue">
+
+</div>
+
+<br>
+
+<button (click)="back()">Back</button>

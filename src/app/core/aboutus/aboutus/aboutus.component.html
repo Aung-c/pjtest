@@ -1,0 +1,121 @@
+<div class="container">
+
+  <h2>User Management Form</h2>
+
+  <div class="form-group">
+    <label>First Name</label>
+
+    <input
+      type="text"
+      [(ngModel)]="formData.firstName"
+      placeholder="Enter First Name">
+
+    <small class="error" *ngIf="errors.firstName">
+      {{ errors.firstName }}
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label>Last Name</label>
+
+    <input
+      type="text"
+      [(ngModel)]="formData.lastName"
+      placeholder="Enter Last Name">
+
+    <small class="error" *ngIf="errors.lastName">
+      {{ errors.lastName }}
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label>Middle Name</label>
+
+    <input
+      type="text"
+      [(ngModel)]="formData.maidenName"
+      placeholder="Enter Middle Name">
+
+    <small class="error" *ngIf="errors.maidenName">
+      {{ errors.maidenName }}
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label>Age</label>
+
+    <input
+      type="number"
+      [(ngModel)]="formData.age"
+      placeholder="Enter Age">
+
+    <small class="error" *ngIf="errors.age">
+      {{ errors.age }}
+    </small>
+  </div>
+
+ <div class="btn-group">
+
+    <button
+      class="btn btn-primary"
+      (click)="saveData()">
+      Create
+    </button>
+
+    <button
+      class="btn btn-warning"
+      (click)="updateUser()">
+      Update
+    </button>
+
+    <button
+      class="btn btn-danger"
+      (click)="deleteUser()">
+      Delete
+    </button>
+
+  </div>
+
+  <hr>
+
+  <h3>User List</h3>
+
+  <table border="1" width="100%">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Middle Name</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr
+        *ngFor="let user of users"
+        [class.selected-row]="user.id === selectedId">
+
+        <td>{{ user.id }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.maidenName }}</td>
+        <td>{{ user.age }}</td>
+
+        <td>
+          <button
+            class="select-btn"
+            (click)="editUser(user)">
+            Select
+          </button>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
