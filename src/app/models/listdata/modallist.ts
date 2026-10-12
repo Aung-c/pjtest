@@ -132,10 +132,11 @@ export class ListData implements OnInit {
       next: (res: any) => {
         this.terminals = res?.Results ?? [];
         this.terminalLoading = false;
-      },
+        this.cdr.detectChanges();
+      },       
+    
       error: (err) => {
         console.error('Terminals error', err);
-        this.terminals = [];
       }
     });
   }
